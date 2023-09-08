@@ -24,7 +24,7 @@ tokens = [
     'Comparacion_Igualdad', 'Op_Logico', 'Sum_Asignacion', 'Decremento',
     'Cadena_Texto', 'Comentario', 'Inicio_Parentesis', 'Fin_Parentesis',
     'Punto_Coma', 'Parentesis_Abrir', 'Parentesis_Cerrar', 'Llave_Abrir',
-    'Llave_Cerrar'
+    'Llave_Cerrar','Coma'
 ] + list(reserved.values())
 
 # Expresiones regulares para los tokens
@@ -47,6 +47,7 @@ t_Parentesis_Abrir = r'\('
 t_Parentesis_Cerrar = r'\)'
 t_Llave_Abrir = r'\{'
 t_Llave_Cerrar = r'\}'
+t_Coma = r'\,'
 
 
 # Regla para manejar identificadores
@@ -103,7 +104,7 @@ def t_Cadena_Texto(t):
 lexer = lex.lex()
 
 # Prueba del analizador léxico
-data = '''
+data = '''Proceso
 Proceso
     flotante Promedio(entero x, entero y, entero z) {
         flotante promedio = (x + y + z) / 3
