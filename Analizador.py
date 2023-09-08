@@ -14,6 +14,7 @@ reserved = {
     'flotante': 'Dato_Flotante',
     'caracter': 'Dato_Caracter',
     'booleano': 'Dato_Booleano',
+    'Funcion': 'Dato_Funcion',
 }
 
 # Lista de tokens
@@ -24,7 +25,7 @@ tokens = [
     'Comparacion_Igualdad', 'Op_Logico', 'Sum_Asignacion', 'Decremento',
     'Cadena_Texto', 'Comentario', 'Inicio_Parentesis', 'Fin_Parentesis',
     'Punto_Coma', 'Parentesis_Abrir', 'Parentesis_Cerrar', 'Llave_Abrir',
-    'Llave_Cerrar','Coma'
+    'Llave_Cerrar', 'Coma', 'Punto'
 ] + list(reserved.values())
 
 # Expresiones regulares para los tokens
@@ -48,6 +49,7 @@ t_Parentesis_Cerrar = r'\)'
 t_Llave_Abrir = r'\{'
 t_Llave_Cerrar = r'\}'
 t_Coma = r'\,'
+t_Punto = r'\.'
 
 
 # Regla para manejar identificadores
@@ -72,18 +74,19 @@ def t_Num_Entero(t):
   return t
 
 
-# Define a rule so we can track line numbers
+# Definir una regla para que podamos rastrear los números de línea
 def t_newline(t):
   r'\n+'
   t.lexer.lineno += len(t.value)
 
-# A string containing ignored characters (spaces and tabs)
+
+# Una cadena que contiene caracteres ignorados (espacios y tabulaciones)
 t_ignore = ' \t'
 
 
-# Error handling rule
+# Regla de manejo de errores
 def t_error(t):
-  print("Illegal character '%s'" % t.value[0])
+  print("Caracter Incorecto no encontrado '%s'" % t.value[0])
   t.lexer.skip(1)
 
 
@@ -104,20 +107,25 @@ def t_Cadena_Texto(t):
 lexer = lex.lex()
 
 # Prueba del analizador léxico
-data = '''Proceso
-Proceso
-    flotante Promedio(entero x, entero y, entero z) {
-        flotante promedio = (x + y + z) / 3
-        retornar promedio
-    }
-    entero x = 10
-    entero y = 20
-    entero z = 30
-    
-    flotante resultado_promedio = Promedio(x, y, z)
-    Imprimir "El promedio de " + x + ", " + y + " y " + z + " es: " + resultado_promedio
+data = '''
+ 
+Estructura Persona {
+    cadena nombre
+    entero edad
+    caracter genero
+}
 
+Proceso
+    Persona persona1
+   	nombre = "Juan"
+    	edad = 30
+    	genero = 'M'
+
+    Imprimir "Nombre: " + nombre
+    Imprimir "Edad: " + edad
+    Imprimir "Género: " + genero
 FinProceso
+
 // Esto es un comentario de línea
 '''
 
