@@ -103,20 +103,19 @@ def t_Cadena_Texto(t):
 lexer = lex.lex()
 
 # Prueba del analizador léxico
-data = '''Proceso
-    entero a = 5
-    flotante b = 3.14
-    caracter c = "X"
-    booleano d = verdadero
-    cadena e = "Hola, mundo!"
-    mientras (a > 0) {
-        Si (a % 2 == 0) {
-            Imprimir "a es par"
-        } Sino {
-            Imprimir "a es impar"
-        }
-        a -= 1
+data = '''
+Proceso
+    flotante Promedio(entero x, entero y, entero z) {
+        flotante promedio = (x + y + z) / 3
+        retornar promedio
     }
+    entero x = 10
+    entero y = 20
+    entero z = 30
+    
+    flotante resultado_promedio = Promedio(x, y, z)
+    Imprimir "El promedio de " + x + ", " + y + " y " + z + " es: " + resultado_promedio
+
 FinProceso
 // Esto es un comentario de línea
 '''
